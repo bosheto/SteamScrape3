@@ -1,0 +1,6 @@
+#Settings file
+OUTPUT_FOLDER = DEV
+DATE/TIME_FORMAT = %H-%M-%d
+OUTPUT_FORMAT = name
+SEPARATION_SYMBOL = ,
+# name%rating%discount%price%link
