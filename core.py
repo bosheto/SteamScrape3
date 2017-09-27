@@ -62,6 +62,7 @@ def scrape(page, file_write):
      
 #Get product name
 def get_product_name(container):
+    #UNDER DEV WORK
     '''Get the name of the product'''
     name_container = container.find('div', {'class':'col search_name ellipsis'})
     name = name_container.find('span', {'class','title'})
