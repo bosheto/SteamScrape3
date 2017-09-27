@@ -3,6 +3,7 @@
 '''Contains all core functions for scraping steam'''
 
 #Imports
+
 from bs4 import BeautifulSoup as soup
 from bs4 import UnicodeDammit as UniDam
 import utils
@@ -56,18 +57,19 @@ def scrape(page, file_write):
         if 'link' in output_string:
             product_link = get_link(link)
             output_string = output_string.replace('link', str(product_link))
-        
-        file_write.write(output_string + '\n')
-        
-     
+        try:
+            file_write.write(output_string + '\n')
+        except UnicodeEncodeError:
+            file_write.write(str(output_string.encode("utf-8")) + '\n')
 #Get product name
 def get_product_name(container):
     #UNDER DEV WORK
     '''Get the name of the product'''
     name_container = container.find('div', {'class':'col search_name ellipsis'})
     name = name_container.find('span', {'class','title'})
-    output_string = name.get_text()
-    return output_string.encode()
+    x = UniDam(name.get_text())
+    output_string = x.unicode_markup
+    return output_string
    
 #A helper fucntion for get_product_name
 def remove_html_tags(string):
