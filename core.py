@@ -11,7 +11,7 @@ import utils
 # Get the program settings from utils module
 utils.get_settings()
 
-# Store the output line format from settings in variable line_format
+# Store the output line formagit t from settings in variable line_format
 line_format = utils.settings['output_line_format']
 
 # Store separation symbol from settings in variable 
