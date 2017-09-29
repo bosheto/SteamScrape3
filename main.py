@@ -54,7 +54,7 @@ while page < last_page :
 # After looping through all pages close file f
 end_time = time.time() - start_time
 end_time = "%.2f" % end_time
-print('\nDone scraping in {} seconds\n'.format(str(end_time)))
+print('\nDone scraping {0} items in {1} secondsgit \n'.format(utils.number_of_items ,str(end_time)))
 f.close()
 print('File {} closed ! \n'.format(str(filename)))
 print ('Thank you for using SteamScrape 3 \n')

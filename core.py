@@ -29,7 +29,7 @@ def scrape(page, file_write):
     
     # Get the container(div) that houses all the products
     main_container = page_soup.find('div', {'id':'search_result_container'})
-    
+    count = 0     
     #for every link(a) in main_container
     for link in main_container.find_all('a'):
 
@@ -58,7 +58,9 @@ def scrape(page, file_write):
             product_link = get_link(link)
             output_string = output_string.replace('link', str(product_link))
         
+        count +=1
         file_write.write(output_string + '\n')
+    utils.number_of_items += count
 #Get product name
 def get_product_name(container):
 

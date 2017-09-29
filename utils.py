@@ -5,6 +5,8 @@
 # This dict holds all the settings for the program
 settings = {'format_settings':'', 'output_folder':'', 'output_line_format':'', 'separation_symbol':''}
 
+number_of_items = 0
+
 # Get the settings from settings.txt
 def get_settings():
     '''Get values from settings file'''
@@ -30,10 +32,11 @@ def get_settings():
 
     # Close settings.txt
     settings_file.close()
-#Set setting values 
+#Set setting values helper function of get_settings()
 def set_setting_value(line, setting_name, setting_value):
     '''Set a setting to value from file line'''
     # Check if setting name is in the line
     if setting_name in line:
         # If true get setting value
         settings[setting_value] = line.replace(setting_name, '').replace('=', '').strip()
+#
