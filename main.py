@@ -7,13 +7,12 @@ import argparse
 import core
 import utils
 
-
 parser = argparse.ArgumentParser()
 parser.add_argument('--lastpage', dest='lastpage', help='Specify the last page to scrape', type=int)
 args = parser.parse_args()
 
 
-print('\nSteamScrape3 by Boris Gezkovski\n')
+print('\nSteamScrape3 by bosheto\n')
 
 # Get the program settings from utils module
 utils.get_settings()
@@ -58,11 +57,13 @@ while page < last_page:
     if page == 1 and args.lastpage == None:
         # set last page 
         last_page = core.get_last_page(html_source) + 1
-        print('Number of pages to scrape:' + str(last_page))
+        print('Number of pages to scrape: ' + str(last_page) + '\n')
     elif page == 1 and args.lastpage != None:
         last_page = args.lastpage + 1
-        print('Number of pages to scrape:' + str(args.lastpage))
+        print('Number of pages to scrape: ' + str(args.lastpage) + '\n')
 
+   
+    print('Scraping page ' + str(page), sep= ' ', end='\r', flush=True)
     # Call scrape function from core module giving it the html_source and the file f
     core.scrape(html_source, f) 
     # increment page by 1
@@ -72,7 +73,7 @@ while page < last_page:
 
 end_time = time.time() - start_time
 end_time = "%.2f" % end_time
-
+print()
 print('\nDone scraping {0} items in {1} seconds\n'.format(utils.number_of_items ,str(end_time)))
 
 f.close()
