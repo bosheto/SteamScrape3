@@ -27,6 +27,7 @@ filename = utils.settings['output_folder'] + '/SteamSpecial'+ '-' + time_date + 
 f = open(filename, 'w')
 print('File {} created\n'.format(str(filename)))
 start_time = time.time()
+
 # loop until page is less than last page
 while page < last_page :
 

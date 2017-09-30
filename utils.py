@@ -3,7 +3,7 @@
 '''Utility functions'''
 
 # This dict holds all the settings for the program
-settings = {'format_settings':'', 'output_folder':'', 'output_line_format':'', 'separation_symbol':''}
+settings = {'format_settings':'', 'output_folder':'', 'output_line_format':'', 'separation_symbol':'', 'sort_by':''}
 
 number_of_items = 0
 
@@ -29,7 +29,8 @@ def get_settings():
         set_setting_value(line, 'OUTPUT_FORMAT', 'output_line_format')
         # Set separation symbol to value from settings file
         set_setting_value(line, 'SEPARATION_SYMBOL', 'separation_symbol')
-
+        # Set sorting 
+        set_setting_value(line, 'SORT_BY', 'sort_by')
     # Close settings.txt
     settings_file.close()
 #Set setting values helper function of get_settings()
