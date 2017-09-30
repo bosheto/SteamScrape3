@@ -1,7 +1,20 @@
 #Settings file
+# use '#' for comments 
+
+#Set output folder example C:\users\yourname\Documents
 OUTPUT_FOLDER = OUTPUT
+
+#Set the date time forma %H - hour %M - minute %d - date
 DATE/TIME_FORMAT = %H-%M-%d
+
+#Choose what the program will store from the page you can put theese
+#In any order or remove any of them, separate them with a % 
 OUTPUT_FORMAT = name%rating%discount%price%link
+
+#Set what symbol will separate name,rating,etc
 SEPARATION_SYMBOL = ,
+
+#Choose how to sort the pages(released[release date],name,price_asc,
+#price_des or reviews if blank defaults to relavance)
 SORT_BY = 
 
