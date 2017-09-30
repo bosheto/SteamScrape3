@@ -1,7 +1,7 @@
 #Settings file
-OUTPUT_FOLDER = OUTPUT
+OUTPUT_FOLDER = F:\SteamScrapes\Specials
 DATE/TIME_FORMAT = %H-%M-%d
 OUTPUT_FORMAT = name%rating%discount%price%link
 SEPARATION_SYMBOL = ,
-SORT_BY = PRICE_ASC
+SORT_BY = 
 

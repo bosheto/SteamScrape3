@@ -3,15 +3,25 @@
 # Imports
 from urllib.request import urlopen as uOpen
 import time
+import argparse
 import core
 import utils
 
-print('\nSteamScrape3\n')
+parser = argparse.ArgumentParser()
+parser.add_argument('--lastpage', dest='lastpage', help='Specify the last page to scrape', type=int)
+parser.add_argument('--exit', dest='exit', help='Close program when done scraping', action='store_true')
+args = parser.parse_args()
+
+
+print('\nSteamScrape3 by bosheto\n')
 
 # Get the program settings from utils module
 utils.get_settings()
 
+
 print('Settings loaded\n')
+
+
 # Create variable to store page number and set it to 1
 page = 1
 # Create variable to store last page and set it to 2 
@@ -45,11 +55,16 @@ while page < last_page:
     # --Close Url-- 
     uClient.close()
     # Run only if first page
-    if page == 1:
+    if page == 1 and args.lastpage == None:
         # set last page 
         last_page = core.get_last_page(html_source) + 1
-        print('Number of pages:' + str(last_page))
+        print('Number of pages to scrape: ' + str(last_page) + '\n')
+    elif page == 1 and args.lastpage != None:
+        last_page = args.lastpage + 1
+        print('Number of pages to scrape: ' + str(args.lastpage) + '\n')
 
+   
+    print('Scraping page ' + str(page), sep= ' ', end='\r', flush=True)
     # Call scrape function from core module giving it the html_source and the file f
     core.scrape(html_source, f) 
     # increment page by 1
@@ -59,10 +74,13 @@ while page < last_page:
 
 end_time = time.time() - start_time
 end_time = "%.2f" % end_time
-
+print()
 print('\nDone scraping {0} items in {1} seconds\n'.format(utils.number_of_items ,str(end_time)))
 
 f.close()
 
 print('File {} closed ! \n'.format(str(filename)))
 print ('Thank you for using SteamScrape 3 \n')
+
+if not args.exit :
+    input('Press Enter to exit')
