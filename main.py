@@ -9,6 +9,7 @@ import utils
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--lastpage', dest='lastpage', help='Specify the last page to scrape', type=int)
+parser.add_argument('--exit', dest='exit', help='Close program when done scraping', action='store_true')
 args = parser.parse_args()
 
 
@@ -80,3 +81,6 @@ f.close()
 
 print('File {} closed ! \n'.format(str(filename)))
 print ('Thank you for using SteamScrape 3 \n')
+
+if not args.exit :
+    input()
