@@ -83,4 +83,4 @@ print('File {} closed ! \n'.format(str(filename)))
 print ('Thank you for using SteamScrape 3 \n')
 
 if not args.exit :
-    input()
+    input('Press Enter to exit')
