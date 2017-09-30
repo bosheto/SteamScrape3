@@ -3,7 +3,8 @@
 '''Utility functions'''
 
 # This dict holds all the settings for the program
-settings = {'format_settings':'', 'output_folder':'', 'output_line_format':'', 'separation_symbol':'', 'sort_by':''}
+settings = {'format_settings':'', 'output_folder':'', 
+'output_line_format':'', 'separation_symbol':'', 'sort_by':''}
 
 number_of_items = 0
 
@@ -29,9 +30,10 @@ def get_settings():
         set_setting_value(line, 'OUTPUT_FORMAT', 'output_line_format')
         # Set separation symbol to value from settings file
         set_setting_value(line, 'SEPARATION_SYMBOL', 'separation_symbol')
-        # Set sorting 
+        # Set sorting option
         set_setting_value(line, 'SORT_BY', 'sort_by')
     # Close settings.txt
+    set_sorting()
     settings_file.close()
 #Set setting values helper function of get_settings()
 def set_setting_value(line, setting_name, setting_value):
@@ -41,3 +43,25 @@ def set_setting_value(line, setting_name, setting_value):
         # If true get setting value
         settings[setting_value] = line.replace(setting_name, '').replace('=', '').strip()
 #
+def get_url():
+    url = ''
+    if settings['sort_by'] != '':
+        url = 'http://store.steampowered.com/search/?sort_by={}&os=win&specials=1&page='.format(settings['sort_by'])
+    else:
+        url = 'http://store.steampowered.com/search/?specials=1&page='
+    return url
+#
+def set_sorting():
+    sorting_option = settings['sort_by'].lower()
+    if sorting_option == 'released':
+        settings['sort_by'] = 'Released_DESC'
+    elif sorting_option == 'name':
+        settings['sort_by'] = 'Name_ASC'
+    elif sorting_option == 'price_asc':
+        settings['sort_by'] = 'Price_ASC'
+    elif sorting_option == 'price_des':
+        settings['sort_by'] = 'Price_DESC'
+    elif sorting_option == 'reviews':
+        settings['sort_by'] = 'Reviews_DESC'
+    else:
+        settings['sort_by'] = ''

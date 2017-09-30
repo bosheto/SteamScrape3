@@ -59,8 +59,10 @@ def scrape(page, file_write):
             output_string = output_string.replace('link', str(product_link))
         
         count +=1
+        
         file_write.write(output_string + '\n')
     utils.number_of_items += count
+   # print(utils.number_of_items)
 #Get product name
 def get_product_name(container):
 

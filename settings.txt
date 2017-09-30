@@ -3,5 +3,5 @@ OUTPUT_FOLDER = OUTPUT
 DATE/TIME_FORMAT = %H-%M-%d
 OUTPUT_FORMAT = name%rating%discount%price%link
 SEPARATION_SYMBOL = ,
-SORT_BY=
+SORT_BY = PRICE_ASC
 
