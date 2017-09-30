@@ -29,7 +29,7 @@ print('File {} created\n'.format(str(filename)))
 start_time = time.time()
 
 static_url = utils.get_url()
-print(static_url)
+
 # loop until page is less than last page
 while page < last_page:
 
