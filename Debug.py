@@ -1,33 +1,27 @@
 from urllib.request import urlopen as uOpen
-
+from queue import Queue
 import core
+from thread_class import Worker
+from utils import get_url
+from time import time
 
-f = open('Dev/testing.txt', 'w')
+start = time()
 
-page = 1
-last_page = 2 
+f = open('testing.txt', 'w')
 
-while page < 3:
+last_page = core.get_last_page() 
+q = Queue()
 
-    # Url to page 
-    url = 'http://store.steampowered.com/search/?specials=1&os=win&page=' + str(page)
+for i in range(4):
+    worker = Worker(q, f)
+    worker.daemon = True
+    worker.start()
 
-    # --Open Url-- 
-    uClient = uOpen(url)
+for x in range(last_page):
+    q.put(str(get_url()) + str(x+1))
 
-    # copy its contents to html_source var 
-    html_source = uClient.read()
-
-    # --Close Url-- 
-    uClient.close()
-    # Run only if first page
-    if page == 1:
-        # set last page 
-        last_page = core.get_last_page(html_source) + 1
-    
-    # Call scrape function from core module giving it the html_source and the file f
-    core.scrape(html_source, f) 
-    # increment page by 1
-    page += 1
+q.join()
 
 f.close()
+
+print("Took {}".format(time()-start))

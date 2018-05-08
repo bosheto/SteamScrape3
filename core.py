@@ -3,10 +3,11 @@
 '''Contains all core functions for scraping steam'''
 
 #Imports
-
+from urllib.request import urlopen as uOpen
 from bs4 import BeautifulSoup as soup
 from bs4 import UnicodeDammit as UniDam
 import utils
+
 
 # Get the program settings from utils module
 utils.get_settings()
@@ -88,7 +89,6 @@ def remove_html_tags(string):
             remove = False
     output_string = output_string.strip()
     return output_string
-
 # Format Rating information
 def get_rating(container):
     '''Get the rating information takes a container'''
@@ -100,9 +100,9 @@ def get_rating(container):
     number_of_reviews = 0
 
     try:
-        rating = rating_container.find('span', {'data-store-tooltip':True})
+        rating = rating_container.find('span', {'data-tooltip-html':True})
     
-        rating_text = rating['data-store-tooltip'] 
+        rating_text = rating['data-tooltip-html'] 
 
         if 'Very Positive' in rating_text:
             word_rating = 'Very Positive'
@@ -136,11 +136,11 @@ def get_rating(container):
         output_string = str(procent_rating) + separation_symbol + str(word_rating) + separation_symbol + str(number_of_reviews)
 
         return output_string
-    except TypeError:
+    except TypeError as e :
         
         output_string = '0' + separation_symbol + 'NO RATING' + separation_symbol + '0'
         return output_string
-# Get product discount
+# Get product discountword_rating
 def get_discount(container):
     '''Get the product discount takes a container'''
     discount_container = container.find('div', {'class':'col search_discount responsive_secondrow'})
@@ -166,8 +166,10 @@ def get_price(container):
     price = output_string
     return price
 # Get last page
-def get_last_page(page):
+def get_last_page():
     '''Get the last page of the list '''
+    page = connect(utils.get_url())
+
     page_soup = soup(page, 'html.parser')
     
     main_container = page_soup.find('div', {'id':'search_result_container'})
@@ -183,10 +185,14 @@ def get_last_page(page):
             continue
     
     return int(page_number[-1])
-
 #
 def get_link(container):
     product_link = container['href']
-    return product_link
- 
-#
+    return product_link 
+# Connect to url and retrive html
+def connect(url):
+    '''Connect to url and return html source as string'''
+    uClient = uOpen(url)
+    html_source = uClient.read()
+    uClient.close()
+    return html_source
